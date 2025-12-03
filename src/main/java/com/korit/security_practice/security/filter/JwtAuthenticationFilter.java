@@ -2,7 +2,7 @@ package com.korit.security_practice.security.filter;
 
 
 import com.korit.security_practice.entity.User;
-import com.korit.security_practice.jwt.JwtUtils;
+import com.korit.security_practice.security.jwt.JwtUtils;
 import com.korit.security_practice.repository.UserRepository;
 import com.korit.security_practice.security.model.Principal;
 import io.jsonwebtoken.Claims;

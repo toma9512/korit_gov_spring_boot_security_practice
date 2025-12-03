@@ -1,4 +1,4 @@
-package com.korit.security_practice.jwt;
+package com.korit.security_practice.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

@@ -6,7 +6,7 @@ import com.korit.security_practice.dto.SignupReqDto;
 import com.korit.security_practice.entity.User;
 import com.korit.security_practice.entity.UserRole;
 import com.korit.security_practice.entity.Verify;
-import com.korit.security_practice.jwt.JwtUtils;
+import com.korit.security_practice.security.jwt.JwtUtils;
 import com.korit.security_practice.repository.UserRepository;
 import com.korit.security_practice.repository.UserRoleRepository;
 import com.korit.security_practice.repository.VerifyRepository;

@@ -2,7 +2,7 @@ package com.korit.security_practice.security.handler;
 
 import com.korit.security_practice.entity.OAuth2User;
 import com.korit.security_practice.entity.User;
-import com.korit.security_practice.jwt.JwtUtils;
+import com.korit.security_practice.security.jwt.JwtUtils;
 import com.korit.security_practice.repository.OAuth2UserRepository;
 import com.korit.security_practice.repository.UserRepository;
 import jakarta.servlet.ServletException;
