@@ -57,7 +57,7 @@ public class OAuth2AuthService {
                 .build();
         userRoleRepository.addUserRole(userRole);
 
-        String verifyCode = String.valueOf((int) (Math.random()*90000 + 10000));
+        String verifyCode = String.valueOf((int) (Math.random()*100000));
         Verify verify = Verify.builder()
                 .userId(user.getUserId())
                 .verifyCode(verifyCode)
