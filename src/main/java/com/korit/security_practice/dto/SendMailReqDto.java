@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class VerifyEmailReqDto {
-    private String verifyCode;
+public class SendMailReqDto {
+    private String email;
 }

@@ -2,7 +2,7 @@ package com.korit.security_practice.controller;
 
 import com.korit.security_practice.dto.UpdatePasswordReqDto;
 import com.korit.security_practice.dto.UpdateUsernameReqDto;
-import com.korit.security_practice.dto.VerifyEmailReqDto;
+import com.korit.security_practice.dto.VerifyCodeReqDto;
 import com.korit.security_practice.security.model.Principal;
 import com.korit.security_practice.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,8 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/verify")
-    public ResponseEntity<?> verifyEmail(@RequestBody VerifyEmailReqDto verifyEmailReqDto, @AuthenticationPrincipal Principal principal) {
-        return ResponseEntity.ok(accountService.verifyEmail(verifyEmailReqDto, principal));
+    public ResponseEntity<?> verifyEmail(@RequestBody VerifyCodeReqDto verifyCodeReqDto, @AuthenticationPrincipal Principal principal) {
+        return ResponseEntity.ok(accountService.verifyEmail(verifyCodeReqDto, principal));
     }
 
     @PostMapping("/update/password")

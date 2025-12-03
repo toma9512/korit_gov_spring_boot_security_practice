@@ -3,7 +3,7 @@ package com.korit.security_practice.service;
 import com.korit.security_practice.dto.ApiRespDto;
 import com.korit.security_practice.dto.UpdatePasswordReqDto;
 import com.korit.security_practice.dto.UpdateUsernameReqDto;
-import com.korit.security_practice.dto.VerifyEmailReqDto;
+import com.korit.security_practice.dto.VerifyCodeReqDto;
 import com.korit.security_practice.entity.User;
 import com.korit.security_practice.entity.UserRole;
 import com.korit.security_practice.entity.Verify;
@@ -31,27 +31,27 @@ public class AccountService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public ApiRespDto<?> verifyEmail(VerifyEmailReqDto verifyEmailReqDto, Principal principal) {
-        if (!verifyEmailReqDto.getUserId().equals(principal.getUserId())) {
+    public ApiRespDto<?> verifyEmail(VerifyCodeReqDto verifyCodeReqDto, Principal principal) {
+        if (!verifyCodeReqDto.getUserId().equals(principal.getUserId())) {
             return new ApiRespDto<>("failed", "잘못된 접근입니다.", null);
         }
-        Optional<Verify> foundVerify = verifyRepository.getVerifyByUserId(verifyEmailReqDto.getUserId());
+        Optional<Verify> foundVerify = verifyRepository.getVerifyByUserId(verifyCodeReqDto.getUserId());
 
         if (foundVerify.isEmpty()) {
             return new ApiRespDto<>("failed", "이미 인증된 계정입니다.", null );
         }
 
-        if (!verifyEmailReqDto.getVerifyCode().equals(foundVerify.get().getVerifyCode())) {
+        if (!verifyCodeReqDto.getVerifyCode().equals(foundVerify.get().getVerifyCode())) {
             return new ApiRespDto<>("failed", "코드가 잘못되었습니다.", null);
         }
 
-        int result = verifyRepository.deleteVerifyByUserId(verifyEmailReqDto.getUserId());
+        int result = verifyRepository.deleteVerifyByUserId(verifyCodeReqDto.getUserId());
         if (result != 1) {
             return new ApiRespDto<>("failed", "인증 실패", null);
         }
 
         UserRole userRole = UserRole.builder()
-                .userId(verifyEmailReqDto.getUserId())
+                .userId(verifyCodeReqDto.getUserId())
                 .roleId(2)
                 .build();
 

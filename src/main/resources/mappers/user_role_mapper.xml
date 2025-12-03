@@ -22,6 +22,6 @@
         set
             role_id = #{roleId}
         where
-            user_id = #{userId};
+            user_role_id = #{userRoleId};
     </update>
 </mapper>

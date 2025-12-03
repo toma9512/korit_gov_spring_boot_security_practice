@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class VerifyEmailReqDto {
+public class VerifyCodeReqDto {
+    private Integer userId;
     private String verifyCode;
 }
+

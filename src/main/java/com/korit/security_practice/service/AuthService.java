@@ -51,8 +51,8 @@ public class AuthService {
                 .userId(optionalUser.get().getUserId())
                 .roleId(3)
                 .build();
-
         userRoleRepository.addUserRole(userRole);
+
         String random = String.valueOf(((int) (Math.random()*90000+10000)));
         Verify verify = Verify.builder()
                 .userId(optionalUser.get().getUserId())

@@ -75,7 +75,7 @@
         insert into
             user_tb
         values
-            (0, #{username}, #{password}, #{email}, now(), null);
+            (0, #{email}, #{password}, #{username}, now(), null);
     </insert>
 
     <update id="updatePassword">
