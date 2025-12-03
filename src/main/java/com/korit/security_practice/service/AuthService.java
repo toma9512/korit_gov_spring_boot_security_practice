@@ -10,7 +10,6 @@ import com.korit.security_practice.jwt.JwtUtils;
 import com.korit.security_practice.repository.UserRepository;
 import com.korit.security_practice.repository.UserRoleRepository;
 import com.korit.security_practice.repository.VerifyRepository;
-import com.korit.security_practice.security.model.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,10 +52,13 @@ public class AuthService {
                 .build();
         userRoleRepository.addUserRole(userRole);
 
-        String random = String.valueOf(((int) (Math.random()*100000)));
+        String verifyCode = String.valueOf(((int) (Math.random()*100000)));
+        while (verifyCode.length()<5) {
+            verifyCode = "0" + verifyCode;
+        }
         Verify verify = Verify.builder()
                 .userId(optionalUser.get().getUserId())
-                .verifyCode(random)
+                .verifyCode(verifyCode)
                 .build();
         verifyRepository.addVerify(verify);
 
