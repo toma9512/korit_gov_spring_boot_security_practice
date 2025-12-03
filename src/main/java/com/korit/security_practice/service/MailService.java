@@ -48,15 +48,20 @@ public class MailService {
             return new ApiRespDto<>("failed", "인증이 필요하지 않은 계정입니다.", null);
         }
 
-        Optional<Verify> optionalVerify = verifyRepository.getVerifyByUserId(principal.getUserId());
-        if (optionalVerify.isEmpty()) {
-            return new ApiRespDto<>("failed", "이미 인증 완료된 계정입니다.", null);
+        String verifyCode = String.valueOf((int) (Math.random()*100000));
+        while (verifyCode.length()<5) {
+            verifyCode = "0" + verifyCode;
         }
+        Verify verify = Verify.builder()
+                .userId(user.getUserId())
+                .verifyCode(verifyCode)
+                .build();
+        verifyRepository.addVerify(verify);
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("[인증] 이메일 인증 요청입니다.");
         message.setTo(sendMailReqDto.getEmail());
-        message.setText("인증 코드: " + optionalVerify.get().getVerifyCode());
+        message.setText("인증 코드: " + verifyCode);
         javaMailSender.send(message);
 
         return new ApiRespDto<>("success", "이메일 전송 완료", null);

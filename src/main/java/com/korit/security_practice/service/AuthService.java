@@ -52,16 +52,6 @@ public class AuthService {
                 .build();
         userRoleRepository.addUserRole(userRole);
 
-        String verifyCode = String.valueOf(((int) (Math.random()*100000)));
-        while (verifyCode.length()<5) {
-            verifyCode = "0" + verifyCode;
-        }
-        Verify verify = Verify.builder()
-                .userId(optionalUser.get().getUserId())
-                .verifyCode(verifyCode)
-                .build();
-        verifyRepository.addVerify(verify);
-
         return new ApiRespDto<>("success", "회원 가입 성공", optionalUser.get());
     }
 

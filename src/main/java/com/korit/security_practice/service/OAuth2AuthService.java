@@ -57,16 +57,6 @@ public class OAuth2AuthService {
                 .build();
         userRoleRepository.addUserRole(userRole);
 
-        String verifyCode = String.valueOf((int) (Math.random()*100000));
-        while (verifyCode.length()<5) {
-            verifyCode = "0" + verifyCode;
-        }
-        Verify verify = Verify.builder()
-                .userId(user.getUserId())
-                .verifyCode(verifyCode)
-                .build();
-        verifyRepository.addVerify(verify);
-
         oAuth2UserRepository.addOAuth2User(oAuth2SignupReqDto.toOAuth2UserEntity(user.getUserId()));
 
         return new ApiRespDto<>("success", "회원 가입 성공", null);
